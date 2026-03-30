@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="DoReMiFo maps acoustic properties to emotional response — giving sound designers and brand teams a data layer for audio decisions.">
+<title>DoReMiFo — Sound Intelligence Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #ffffff;
+  --tertiary: #f5f4f1;
+  --text:     #1a1a1a;
+  --muted:    #666666;
+  --faint:    #999999;
+  --border:   #e2e2e2;
+  --border-hi:#c8c8c8;
+  --accent:   #9a3412;
+  --accent-bg:#fff7ed;
+  --sans: 'Syne', system-ui, sans-serif;
+  --body: 'Inter', system-ui, sans-serif;
+  --mono: 'SFMono-Regular', 'Consolas', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--body); background: var(--bg); color: var(--text); font-size: 1rem; line-height: 1.75; }
+
+.wrap        { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+.wrap-narrow { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* NAV */
+nav {
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+  background: var(--bg); z-index: 100;
+}
+.nav-inner {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: .85rem 0; gap: 1rem; flex-wrap: wrap;
+}
+.nav-logo {
+  font-family: var(--sans);
+  font-size: .88rem; font-weight: 700;
+  color: var(--text); text-decoration: none;
+  letter-spacing: .05em;
+}
+.nav-links { display: flex; gap: 1.4rem; align-items: center; flex-wrap: wrap; }
+.nav-links a {
+  font-size: .78rem; color: var(--muted);
+  text-decoration: none; transition: color .2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  font-size: .78rem; font-weight: 600;
+  color: #fff; background: var(--accent);
+  padding: .4rem 1rem; border-radius: 99px;
+  text-decoration: none; transition: opacity .2s;
+}
+.nav-cta:hover { opacity: .8; }
+
+/* SECTIONS */
+.sec-white { background: var(--bg); border-top: 1px solid var(--border); padding: 5rem 0; }
+.sec-grey  { background: var(--tertiary); border-top: 1px solid var(--border); padding: 5rem 0; }
+
+.sec-label {
+  font-family: var(--mono);
+  font-size: .68rem; font-weight: 600;
+  color: var(--faint);
+  letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: .5rem;
+}
+.sec h2 {
+  font-family: var(--sans);
+  font-size: clamp(1.6rem, 3.5vw, 2rem);
+  font-weight: 700; margin-bottom: .6rem;
+}
+.sec-desc {
+  font-size: .92rem; color: var(--muted);
+  line-height: 1.7; max-width: 580px;
+  margin-bottom: 2.5rem;
+  border-left: 2px solid var(--border);
+  padding-left: 1rem;
+}
+
+/* HERO */
+.hero { padding: 5.5rem 0 4.5rem; border-bottom: 1px solid var(--border); }
+.hero-label {
+  font-family: var(--mono);
+  font-size: .7rem; font-weight: 600;
+  color: var(--faint);
+  letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.hero h1 {
+  font-family: var(--sans);
+  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+  font-weight: 700; line-height: 1.1;
+  margin-bottom: 1.2rem; max-width: 720px;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-sub {
+  font-size: 1.05rem; color: var(--muted);
+  line-height: 1.7; max-width: 540px; margin-bottom: 2rem;
+}
+.hero-cta { display: flex; gap: .8rem; flex-wrap: wrap; align-items: center; }
+.btn-primary {
+  font-family: var(--body); font-size: .92rem; font-weight: 600;
+  color: #fff; background: var(--accent);
+  padding: .7rem 1.6rem; border-radius: 99px;
+  text-decoration: none; transition: opacity .2s;
+  border: none; cursor: pointer; display: inline-block;
+}
+.btn-primary:hover { opacity: .8; }
+.btn-outline {
+  font-family: var(--body); font-size: .92rem; font-weight: 500;
+  color: var(--text); background: transparent;
+  padding: .7rem 1.6rem; border-radius: 99px;
+  text-decoration: none;
+  border: 1.5px solid var(--border-hi);
+  transition: border-color .2s; cursor: pointer; display: inline-block;
+}
+.btn-outline:hover { border-color: var(--text); }
+.hero-proof {
+  display: flex; gap: 2rem; flex-wrap: wrap;
+  margin-top: 2.5rem; padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+.proof-item { font-size: .78rem; color: var(--faint); }
+.proof-item strong { color: var(--muted); font-weight: 500; display: block; margin-bottom: .1rem; }
+
+/* PROBLEM */
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem; margin-top: 2rem;
+}
+.problem-card {
+  border: 1px solid var(--border); border-radius: .75rem;
+  padding: 1.4rem 1.6rem; background: var(--bg);
+  transition: border-color .2s;
+}
+.problem-card:hover { border-color: var(--border-hi); }
+.problem-card .pc-icon { font-size: 1.4rem; margin-bottom: .6rem; }
+.problem-card h3 { font-family: var(--sans); font-size: 1rem; font-weight: 700; margin-bottom: .4rem; }
+.problem-card p  { font-size: .85rem; color: var(--muted); line-height: 1.65; }
+
+/* OUTCOMES */
+.outcome-list { display: flex; flex-direction: column; margin-top: 2rem; }
+.outcome-row {
+  display: flex; gap: 2rem; align-items: flex-start;
+  padding: 1.8rem 0; border-bottom: 1px solid var(--border);
+}
+.outcome-row:last-child { border-bottom: none; }
+.outcome-marker {
+  font-family: var(--mono); font-size: .68rem;
+  color: var(--accent); flex-shrink: 0;
+  width: 1.8rem; padding-top: .25rem;
+}
+.outcome-body h3 {
+  font-family: var(--sans); font-size: 1.05rem;
+  font-weight: 700; margin-bottom: .35rem;
+}
+.outcome-body p { font-size: .88rem; color: var(--muted); line-height: 1.7; }
+
+/* ECOSYSTEM */
+.eco-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem; margin-top: 2rem;
+}
+.eco-card {
+  border: 1px solid var(--border); border-radius: .75rem;
+  padding: 1.4rem 1.6rem; background: var(--bg);
+  text-decoration: none; color: var(--text);
+  transition: border-color .2s, box-shadow .2s;
+  display: flex; flex-direction: column; gap: .4rem;
+}
+.eco-card:hover {
+  border-color: var(--border-hi);
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.eco-card h3 { font-family: var(--sans); font-size: .95rem; font-weight: 700; }
+.eco-card p  { font-size: .82rem; color: var(--muted); line-height: 1.6; flex: 1; }
+.eco-link    { font-size: .72rem; color: var(--faint); font-family: var(--mono); margin-top: .4rem; }
+
+/* BADGES */
+.badge {
+  display: inline-block; font-size: .65rem; font-weight: 600;
+  padding: .18rem .55rem; border-radius: 4px;
+  font-family: var(--body); width: fit-content;
+}
+.badge-green  { background:#f0fdf4; color:#166534; border:1px solid #bbf7d0; }
+.badge-blue   { background:#eff6ff; color:#1e3a8a; border:1px solid #bfdbfe; }
+.badge-amber  { background:#fffbeb; color:#92400e; border:1px solid #fde68a; }
+.badge-purple { background:#faf5ff; color:#4c1d95; border:1px solid #e9d5ff; }
+.badge-gray   { background:var(--tertiary); color:var(--muted); border:1px solid var(--border); }
+
+/* RESEARCH */
+.cred-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem; margin-top: 2rem;
+}
+.cred-card {
+  border: 1px solid var(--border); border-radius: .75rem;
+  padding: 1.2rem 1.4rem; background: var(--tertiary);
+  transition: border-color .2s;
+}
+.cred-card:hover { border-color: var(--border-hi); }
+.cred-label {
+  font-family: var(--mono); font-size: .65rem;
+  color: var(--faint); text-transform: uppercase;
+  letter-spacing: .08em; margin-bottom: .4rem;
+}
+.cred-card h3 { font-family: var(--sans); font-size: .88rem; font-weight: 700; }
+
+/* WAITLIST */
+.waitlist-inner { max-width: 520px; margin: 0 auto; text-align: center; }
+.waitlist-inner h2 {
+  font-family: var(--sans);
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 700; margin-bottom: .6rem;
+}
+.waitlist-inner p { font-size: .92rem; color: var(--muted); margin-bottom: 1.6rem; line-height: 1.7; }
+.waitlist-form { display: flex; gap: .6rem; flex-wrap: wrap; justify-content: center; }
+.waitlist-input {
+  flex: 1; min-width: 220px;
+  padding: .65rem 1rem;
+  border: 1.5px solid var(--border-hi);
+  border-radius: 99px;
+  font-size: .9rem; font-family: var(--body);
+  background: var(--bg); color: var(--text);
+  outline: none; transition: border-color .2s;
+}
+.waitlist-input:focus { border-color: var(--text); }
+.waitlist-note {
+  font-family: var(--mono); font-size: .68rem;
+  color: var(--faint); margin-top: .8rem; text-align: center;
+}
+
+/* FOOTER */
+footer { border-top: 1px solid var(--border); padding: 2rem 0; background: var(--bg); }
+.footer-inner {
+  display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+}
+.footer-logo { font-family: var(--sans); font-size: .82rem; font-weight: 700; letter-spacing: .05em; }
+.footer-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.footer-links a { font-size: .75rem; color: var(--faint); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: var(--text); }
+.footer-note { font-size: .72rem; color: var(--faint); }
+
+@media (max-width: 600px) {
+  .hero { padding: 3.5rem 0 3rem; }
+  .sec-white, .sec-grey { padding: 3.5rem 0; }
+  .outcome-row { flex-direction: column; gap: .5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#">DoReMiFo</a>
+      <div class="nav-links">
+        <a href="#problem">Why it matters</a>
+        <a href="#outcomes">What you get</a>
+        <a href="#ecosystem">Products</a>
+        <a href="#research">Research</a>
+        <a href="https://play.doremifo.com">Play</a>
+        <a href="#waitlist" class="nav-cta">Get Early Access</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="wrap-narrow">
+  <div class="hero">
+    <div class="hero-label">Sound Intelligence Platform</div>
+    <h1>Sound shapes trust.<br><em>Now you can measure it.</em></h1>
+    <p class="hero-sub">DoReMiFo gives sound designers and brand teams a data layer for audio decisions — so the sounds you choose are backed by evidence, not instinct.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://play.doremifo.com">▶ Discover your hearing profile</a>
+      <a class="btn-outline" href="#waitlist">Get Early Access</a>
+    </div>
+    <div class="hero-proof">
+      <div class="proof-item"><strong>Academic origin</strong>HAMU Praha · SGS Grant</div>
+      <div class="proof-item"><strong>Emotional model</strong>Russell Circumplex (1980)</div>
+      <div class="proof-item"><strong>Acoustic framework</strong>Inspired by IRCAM descriptors &amp; Essentia</div>
+    </div>
+  </div>
+</div>
+
+<!-- 01 PROBLEM -->
+<div class="sec-white" id="problem">
+  <div class="wrap-narrow sec">
+    <div class="sec-label">01 — The problem</div>
+    <h2>Audio branding runs on gut feeling.</h2>
+    <p class="sec-desc">Sound is the most emotionally direct medium a brand has — and the least rigorously managed. That gap is expensive.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="pc-icon">🎯</div>
+        <h3>Briefs that don't land</h3>
+        <p>"Make it feel premium." "More trustworthy." Without a shared reference, every audio brief is a guessing game — and revisions are expensive.</p>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon">📉</div>
+        <h3>Sound that contradicts your brand</h3>
+        <p>A single notification tone can undermine months of visual brand work. Most teams don't find out until users complain — or churn.</p>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon">🔄</div>
+        <h3>No way to validate</h3>
+        <p>You can A/B test a headline. You can user-test a colour. Sound? You ship it and hope. There has been no tool for evidence-based audio decisions — until now.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 OUTCOMES -->
+<div class="sec-grey" id="outcomes">
+  <div class="wrap-narrow sec">
+    <div class="sec-label">02 — What you get</div>
+    <h2>A common language for sound.</h2>
+    <p class="sec-desc">DoReMiFo translates acoustic properties into emotional outcomes — so designers and clients can speak the same language, and decisions have a reference point.</p>
+    <div class="outcome-list">
+      <div class="outcome-row">
+        <div class="outcome-marker">→</div>
+        <div class="outcome-body">
+          <h3>Know what a sound actually communicates</h3>
+          <p>Before you ship. Before the client hears it. DoReMiFo maps acoustic properties to the emotional responses they reliably produce — so you can design with intent, not hope.</p>
+        </div>
+      </div>
+      <div class="outcome-row">
+        <div class="outcome-marker">→</div>
+        <div class="outcome-body">
+          <h3>Brief smarter, revise less</h3>
+          <p>Replace vague adjectives with measurable targets. A brief a sound designer can act on — and a client can approve without endless rounds.</p>
+        </div>
+      </div>
+      <div class="outcome-row">
+        <div class="outcome-marker">→</div>
+        <div class="outcome-body">
+          <h3>Validate before you commit</h3>
+          <p>Compare candidates against a perceptual reference library. Know whether your shortlisted sounds land where you intend — before they go into production or on air.</p>
+        </div>
+      </div>
+      <div class="outcome-row">
+        <div class="outcome-marker">→</div>
+        <div class="outcome-body">
+          <h3>Evidence your clients can present upward</h3>
+          <p>Audio decisions are hard to defend in a boardroom. DoReMiFo gives you data — perceptual scores, emotional positioning, benchmarks — that make the case without requiring the room to trust your ear.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 ECOSYSTEM -->
+<div class="sec-white" id="ecosystem">
+  <div class="wrap sec">
+    <div class="sec-label">03 — Products</div>
+    <h2>Four ways in.</h2>
+    <p class="sec-desc" style="max-width:560px">Whether you're a researcher, a sound designer, or just curious about how you hear — there's a DoReMiFo product for you.</p>
+    <div class="eco-grid">
+      <a class="eco-card" href="https://play.doremifo.com">
+        <span class="badge badge-blue">Free · Live now</span>
+        <h3>Match the Sound</h3>
+        <p>Three sounds. One is different. Find it. Discover your hearing profile in 10 rounds — and see where you sit on the listener spectrum.</p>
+        <div class="eco-link">→ play.doremifo.com</div>
+      </a>
+      <a class="eco-card" href="https://study.doremifo.com">
+        <span class="badge badge-green">Free · Open to all</span>
+        <h3>Perception Study</h3>
+        <p>Contribute to active research on sound and emotion. Rate short sounds and help build the first evidence base for audio branding.</p>
+        <div class="eco-link">→ study.doremifo.com</div>
+      </a>
+      <a class="eco-card" href="https://plugins.doremifo.com">
+        <span class="badge badge-purple">Early Access</span>
+        <h3>Audio Plugins</h3>
+        <p>Professional tools for sound designers. Synthesise, evaluate and position sounds using the DoReMiFo perceptual framework — inside your DAW.</p>
+        <div class="eco-link">→ plugins.doremifo.com</div>
+      </a>
+      <a class="eco-card" href="#waitlist">
+        <span class="badge badge-amber">Coming soon</span>
+        <h3>Sound Intelligence App</h3>
+        <p>Learn synthesis through the lens of emotion. An interactive platform that teaches sound design by mapping what you hear to what listeners feel.</p>
+        <div class="eco-link">→ Join waitlist</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- 04 RESEARCH -->
+<div class="sec-grey" id="research">
+  <div class="wrap-narrow sec">
+    <div class="sec-label">04 — Research</div>
+    <h2>Built on evidence, not opinion.</h2>
+    <p class="sec-desc">DoReMiFo starts as an academic research project — because the tools are only as good as the data behind them. No product ships without peer-reviewable foundation.</p>
+    <div class="cred-grid">
+      <div class="cred-card">
+        <div class="cred-label">Institution</div>
+        <h3>HAMU Praha</h3>
+      </div>
+      <div class="cred-card">
+        <div class="cred-label">Funding</div>
+        <h3>SGS Academic Grant</h3>
+      </div>
+      <div class="cred-card">
+        <div class="cred-label">Emotional model</div>
+        <h3>Russell Circumplex (1980)</h3>
+      </div>
+      <div class="cred-card">
+        <div class="cred-label">Acoustic framework</div>
+        <h3>Inspired by IRCAM &amp; Essentia</h3>
+      </div>
+      <div class="cred-card">
+        <div class="cred-label">Study participants</div>
+        <h3>200+ via Prolific</h3>
+      </div>
+      <div class="cred-card">
+        <div class="cred-label">Stimulus library</div>
+        <h3>100 controlled sounds</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 05 WAITLIST -->
+<div class="sec-white" id="waitlist">
+  <div class="wrap">
+    <div class="waitlist-inner">
+      <div class="sec-label" style="text-align:center;margin-bottom:.8rem">Early Access</div>
+      <h2>Be first when the tools launch.</h2>
+      <p>The DoReMiFo plugin suite and Sound Intelligence App are in development. Leave your email — we'll reach out when access opens.</p>
+      <div class="waitlist-form">
+        <input class="waitlist-input" type="email" id="wl-email" placeholder="your@email.com">
+        <button class="btn-primary" onclick="submitWaitlist()">Get Early Access →</button>
+      </div>
+      <p class="waitlist-note" id="wl-msg">No spam. Used only to notify you about DoReMiFo product launches.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-logo">DoReMiFo</div>
+      <div class="footer-links">
+        <a href="https://play.doremifo.com">Play</a>
+        <a href="https://study.doremifo.com">Study</a>
+        <a href="https://plugins.doremifo.com">Plugins</a>
+        <a href="mailto:info@doremifo.com">Contact</a>
+      </div>
+      <div class="footer-note">© 2025 DoReMiFo · Prague · CZ</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+async function submitWaitlist() {
+  const email = document.getElementById('wl-email').value.trim();
+  const msg   = document.getElementById('wl-msg');
+  const btn   = document.querySelector('.waitlist-form .btn-primary');
+
+  if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) {
+    msg.style.color = '#9a3412';
+    msg.textContent = 'Please enter a valid email address.';
+    return;
+  }
+
+  btn.textContent = 'Sending…';
+  btn.style.opacity = '.6';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('https://formspree.io/f/xwvwoqnz', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    if (res.ok) {
+      document.getElementById('wl-email').value = '';
+      msg.style.color = '#166534';
+      msg.textContent = '✓ You\'re on the list. We\'ll be in touch.';
+    } else {
+      throw new Error();
+    }
+  } catch {
+    msg.style.color = '#9a3412';
+    msg.textContent = 'Something went wrong. Please try again.';
+  } finally {
+    btn.textContent = 'Get Early Access →';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>

@@ -1,17 +1,10 @@
-<!DOCTYPE html>
+<meta name="description" content="DoReMiFo maps acoustic properties to emotional<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5D2WZG9Q');</script>
-<!-- End Google Tag Manager -->
-<title>DoReMiFo Plugins — MAX 4 Live Audio QA Utilities</title>
-<meta name="description" content="Professional MAX 4 Live audio QA utilities for sound designers and music researchers. Silence Checker, Clip Guard, A/B Comparator, Duration Checker, Spectrogram, LUFS Meter, Export Utility.">
+<meta name="description" content="DoReMiFo maps acoustic properties to emotional response — giving sound designers and brand teams a data layer for audio decisions.">
+<title>DoReMiFo — Sound Intelligence Platform</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/x-icon" href="/favicon.svg">
 <link rel="shortcut icon" href="/favicon.svg">
@@ -26,509 +19,490 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   --faint:    #999999;
   --border:   #e2e2e2;
   --border-hi:#c8c8c8;
-  --accent:   #1a1a1a;
-
-  --c-green:  #166534;
-  --c-coral:  #9f1239;
-  --c-blue:   #1e3a8a;
-  --c-orange: #9a3412;
-  --c-teal:   #134e4a;
-  --c-amber:  #92400e;
-  --c-purple: #4c1d95;
-
-  --bg-green:  #f0fdf4;
-  --bg-coral:  #fff1f2;
-  --bg-blue:   #eff6ff;
-  --bg-orange: #fff7ed;
-  --bg-teal:   #f0fdfa;
-  --bg-amber:  #fffbeb;
-  --bg-purple: #faf5ff;
-
+  --accent:   #0d9488;
+  --accent-bg:#f0fdfa;
   --sans: 'Syne', system-ui, sans-serif;
   --body: 'Inter', system-ui, sans-serif;
   --mono: 'SFMono-Regular', 'Consolas', monospace;
-  --r:    0.75rem;
 }
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: var(--body); background: var(--bg); color: var(--text); font-size: 1rem; line-height: 1.75; overflow-x: hidden; }
+body { font-family: var(--body); background: var(--bg); color: var(--text); font-size: 1rem; line-height: 1.75; }
 
 .wrap        { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
 .wrap-narrow { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
 
-.sec-white { background: var(--bg);       border-top: 1px solid var(--border); padding: 4.5rem 0; }
-.sec-grey  { background: var(--tertiary); border-top: 1px solid var(--border); padding: 4.5rem 0; }
-.sec-white:first-of-type, .sec-grey:first-of-type { border-top: none; }
-
-.sec-heading {
-  font-family: var(--sans);
-  font-size: 2rem; font-weight: 700;
-  letter-spacing: .05em;
-  margin-bottom: 2.5rem;
-  color: var(--text);
-}
-
 /* NAV */
-.site-nav { border-bottom: 1px solid var(--border); background: var(--bg); position: sticky; top: 0; z-index: 100; }
-.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; gap: 1rem; }
-.logo { font-family: var(--sans); font-size: .88rem; font-weight: 700; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: .35rem; letter-spacing: -.01em; }
-.logo .sep { color: var(--faint); font-weight: 400; }
-.nav-links { display: flex; gap: 1.8rem; align-items: center; flex-wrap: wrap; }
-.nav-links a { font-family: var(--body); font-size: .85rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+nav {
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+  background: var(--bg); z-index: 100;
+}
+.nav-inner {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: .85rem 0; gap: 1rem; flex-wrap: wrap;
+}
+.nav-logo {
+  font-family: var(--sans);
+  font-size: .88rem; font-weight: 700;
+  color: var(--text); text-decoration: none;
+  letter-spacing: .05em;
+}
+.nav-links { display: flex; gap: 1.4rem; align-items: center; flex-wrap: wrap; }
+.nav-links a {
+  font-size: .78rem; color: var(--muted);
+  text-decoration: none; transition: color .2s;
+}
 .nav-links a:hover { color: var(--text); }
-.btn-nav { font-size: .85rem; font-weight: 600; color: var(--bg) !important; background: var(--text); padding: .45rem 1.1rem; border-radius: 99px; text-decoration: none; transition: opacity .2s; }
-.btn-nav:hover { opacity: .8; }
+.nav-cta {
+  font-size: .78rem; font-weight: 600;
+  color: #ffffff !important; background: var(--accent);
+  padding: .4rem 1rem; border-radius: 99px;
+  text-decoration: none; transition: opacity .2s;
+}
+.nav-cta:hover { opacity: .8; }
+
+/* SECTIONS */
+.sec-white { background: var(--bg); border-top: 1px solid var(--border); padding: 5rem 0; }
+.sec-grey  { background: var(--tertiary); border-top: 1px solid var(--border); padding: 5rem 0; }
+
+.sec-label {
+  font-family: var(--mono);
+  font-size: .68rem; font-weight: 600;
+  color: var(--faint);
+  letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: .5rem;
+}
+.sec h2 {
+  font-family: var(--sans);
+  font-size: clamp(1.6rem, 3.5vw, 2rem);
+  font-weight: 700; margin-bottom: .6rem;
+}
+.sec-desc {
+  font-size: .92rem; color: var(--muted);
+  line-height: 1.7; max-width: 580px;
+  margin-bottom: 2.5rem;
+  border-left: 2px solid var(--border);
+  padding-left: 1rem;
+}
 
 /* HERO */
-.hero-label { font-family: var(--body); font-size: .78rem; font-weight: 500; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.hero { padding: 5.5rem 0 4.5rem; border-bottom: 1px solid var(--border); }
+.hero-label {
+  font-family: var(--mono);
+  font-size: .7rem; font-weight: 600;
+  color: var(--faint);
+  letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
 .hero h1 {
   font-family: var(--sans);
-  font-size: clamp(1.9rem, 4.5vw, 3.2rem);
-  font-weight: 700; line-height: 1.15;
-  color: var(--text); margin-bottom: 1.2rem;
+  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+  font-weight: 700; line-height: 1.1;
+  margin-bottom: 1.2rem; max-width: 720px;
 }
-.hero-body { font-size: 1.1rem; line-height: 1.65; color: var(--muted); max-width: 640px; margin-bottom: 2rem; }
-.hero-cta   { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 3rem; }
-
-.btn-primary { font-family: var(--body); font-size: .9rem; font-weight: 600; color: var(--bg); background: var(--text); padding: .65rem 1.5rem; border-radius: 99px; text-decoration: none; transition: opacity .2s; border: none; cursor: pointer; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-sub {
+  font-size: 1.05rem; color: var(--muted);
+  line-height: 1.7; max-width: 540px; margin-bottom: 2rem;
+}
+.hero-cta { display: flex; gap: .8rem; flex-wrap: wrap; align-items: center; }
+.btn-primary {
+  font-family: var(--body); font-size: .92rem; font-weight: 600;
+  color: #fff; background: var(--accent);
+  padding: .7rem 1.6rem; border-radius: 99px;
+  text-decoration: none; transition: opacity .2s;
+  border: none; cursor: pointer; display: inline-block;
+}
 .btn-primary:hover { opacity: .8; }
-.btn-outline { font-family: var(--body); font-size: .9rem; font-weight: 500; color: var(--text); background: transparent; padding: .65rem 1.5rem; border-radius: 99px; text-decoration: none; border: 1.5px solid var(--border-hi); transition: border-color .2s; }
+.btn-outline {
+  font-family: var(--body); font-size: .92rem; font-weight: 500;
+  color: var(--text); background: transparent;
+  padding: .7rem 1.6rem; border-radius: 99px;
+  text-decoration: none;
+  border: 1.5px solid var(--border-hi);
+  transition: border-color .2s; cursor: pointer; display: inline-block;
+}
 .btn-outline:hover { border-color: var(--text); }
-
-.hero-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 3rem; }
-.htag { font-family: var(--body); font-size: .72rem; font-weight: 500; padding: .25rem .75rem; border-radius: 99px; border: 1px solid var(--border); color: var(--muted); background: var(--tertiary); }
-
-.hero-stats { display: flex; gap: 2.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
-.stat-n { font-family: var(--sans); font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1; }
-.stat-l { font-size: .72rem; color: var(--muted); margin-top: .25rem; text-transform: uppercase; letter-spacing: .08em; }
-
-/* PACK CARD */
-.pack-card {
-  border: 1.5px solid var(--text);
-  border-radius: var(--r);
-  overflow: hidden;
+.hero-proof {
+  display: flex; gap: 2rem; flex-wrap: wrap;
+  margin-top: 2.5rem; padding-top: 2rem;
+  border-top: 1px solid var(--border);
 }
-.pack-hero-img {
-  width: 100%;
-  display: block;
-  aspect-ratio: 2 / 1;
-  object-fit: cover;
-  object-position: center;
-  border-bottom: 1.5px solid var(--text);
-  background: var(--tertiary);
-}
-.pack-body {
-  padding: 2.2rem 2.4rem;
+.proof-item { font-size: .78rem; color: var(--faint); }
+.proof-item strong { color: var(--muted); font-weight: 500; display: block; margin-bottom: .1rem; }
+
+/* PROBLEM */
+.problem-grid {
   display: grid;
-  grid-template-columns: 1fr 200px;
-  gap: 2rem;
-  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem; margin-top: 2rem;
 }
-@media (max-width: 600px) {
-  .pack-body { grid-template-columns: 1fr; }
+.problem-card {
+  border: 1px solid var(--border); border-radius: .75rem;
+  padding: 1.4rem 1.6rem; background: var(--bg);
+  transition: border-color .2s;
 }
-.pack-label { font-size: .72rem; font-weight: 600; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .65rem; }
-.pack-card h2 { font-family: var(--sans); font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: .55rem; }
-.pack-card p  { font-size: .88rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.1rem; }
-.pack-items { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.2rem; }
-.pack-item  { font-family: var(--mono); font-size: .68rem; padding: .18rem .6rem; border-radius: 4px; background: var(--tertiary); border: 1px solid var(--border); color: var(--muted); }
+.problem-card:hover { border-color: var(--border-hi); }
+.problem-card .pc-icon { font-size: 1.4rem; margin-bottom: .6rem; }
+.problem-card h3 { font-family: var(--sans); font-size: 1rem; font-weight: 700; margin-bottom: .4rem; }
+.problem-card p  { font-size: .85rem; color: var(--muted); line-height: 1.65; }
 
-.price-col    { display: flex; flex-direction: column; align-items: flex-end; gap: .4rem; }
-.price-old    { font-family: var(--mono); font-size: .82rem; color: var(--faint); text-decoration: line-through; }
-.price-main   { font-family: var(--sans); font-size: 3rem; font-weight: 700; color: var(--text); line-height: 1; }
-.price-main sup { font-size: 1.2rem; vertical-align: super; }
-.price-save   { font-size: .7rem; font-weight: 600; background: var(--text); color: var(--bg); padding: .2rem .65rem; border-radius: 99px; letter-spacing: .04em; }
-.price-vat    { font-size: .65rem; color: var(--faint); }
+/* OUTCOMES */
+.outcome-list { display: flex; flex-direction: column; margin-top: 2rem; }
+.outcome-row {
+  display: flex; gap: 2rem; align-items: flex-start;
+  padding: 1.8rem 0; border-bottom: 1px solid var(--border);
+}
+.outcome-row:last-child { border-bottom: none; }
+.outcome-marker {
+  font-family: var(--mono); font-size: .68rem;
+  color: var(--accent); flex-shrink: 0;
+  width: 1.8rem; padding-top: .25rem;
+}
+.outcome-body h3 {
+  font-family: var(--sans); font-size: 1.05rem;
+  font-weight: 700; margin-bottom: .35rem;
+}
+.outcome-body p { font-size: .88rem; color: var(--muted); line-height: 1.7; }
 
-/* PRODUCT GRID */
-.prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-@media (max-width: 600px) { .prod-grid { grid-template-columns: 1fr; } }
-
-.prod-card {
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  overflow: hidden;
-  display: flex; flex-direction: column;
+/* ECOSYSTEM */
+.eco-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem; margin-top: 2rem;
+}
+.eco-card {
+  border: 1px solid var(--border); border-radius: .75rem;
+  padding: 1.4rem 1.6rem; background: var(--bg);
+  text-decoration: none; color: var(--text);
   transition: border-color .2s, box-shadow .2s;
+  display: flex; flex-direction: column; gap: .4rem;
 }
-.prod-card:hover { border-color: var(--border-hi); box-shadow: 0 2px 12px rgba(0,0,0,.06); }
-
-.prod-img {
-  width: 100%;
-  display: block;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  object-position: center top;
-  background: var(--tertiary);
-  border-bottom: 1px solid var(--border);
+.eco-card:hover {
+  border-color: var(--border-hi);
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
 }
+.eco-card h3 { font-family: var(--sans); font-size: .95rem; font-weight: 700; }
+.eco-card p  { font-size: .82rem; color: var(--muted); line-height: 1.6; flex: 1; }
+.eco-link    { font-size: .72rem; color: var(--faint); font-family: var(--mono); margin-top: .4rem; }
 
-.prod-content {
-  padding: 1.4rem 1.6rem;
-  display: flex; flex-direction: column; gap: .5rem;
-  flex: 1;
+/* BADGES */
+.badge {
+  display: inline-block; font-size: .65rem; font-weight: 600;
+  padding: .18rem .55rem; border-radius: 4px;
+  font-family: var(--body); width: fit-content;
 }
+.badge-green  { background:#f0fdf4; color:#166534; border:1px solid #bbf7d0; }
+.badge-blue   { background:#eff6ff; color:#1e3a8a; border:1px solid #bfdbfe; }
+.badge-amber  { background:#fffbeb; color:#92400e; border:1px solid #fde68a; }
+.badge-purple { background:#faf5ff; color:#4c1d95; border:1px solid #e9d5ff; }
+.badge-gray   { background:var(--tertiary); color:var(--muted); border:1px solid var(--border); }
 
-.prod-tag { font-size: .68rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; display: flex; align-items: center; gap: .4rem; }
-.prod-tag .num { color: var(--faint); font-family: var(--mono); }
-
-.prod-cat { font-size: .68rem; font-weight: 600; padding: .15rem .55rem; border-radius: 4px; font-family: var(--body); }
-.cat-green  { background: var(--bg-green);  color: var(--c-green); }
-.cat-coral  { background: var(--bg-coral);  color: var(--c-coral); }
-.cat-blue   { background: var(--bg-blue);   color: var(--c-blue); }
-.cat-orange { background: var(--bg-orange); color: var(--c-orange); }
-.cat-teal   { background: var(--bg-teal);   color: var(--c-teal); }
-.cat-amber  { background: var(--bg-amber);  color: var(--c-amber); }
-.cat-purple { background: var(--bg-purple); color: var(--c-purple); }
-
-.prod-m4l { font-family: var(--mono); font-size: .6rem; background: var(--tertiary); border: 1px solid var(--border); color: var(--faint); padding: .1rem .4rem; border-radius: 3px; margin-left: auto; }
-.prod-card h3 { font-family: var(--sans); font-size: 1rem; font-weight: 700; color: var(--text); letter-spacing: -.01em; }
-.prod-sub { font-size: .75rem; color: var(--muted); margin-top: -.2rem; }
-.prod-card p  { font-size: .82rem; color: var(--muted); line-height: 1.65; flex: 1; }
-
-.prod-feats { list-style: none; display: flex; flex-direction: column; gap: .22rem; }
-.prod-feats li { font-family: var(--mono); font-size: .7rem; color: var(--faint); display: flex; align-items: flex-start; gap: .4rem; line-height: 1.45; }
-.prod-feats li::before { content: '→'; flex-shrink: 0; color: var(--border-hi); }
-
-.prod-footer { display: flex; align-items: center; justify-content: space-between; padding-top: .9rem; margin-top: .4rem; border-top: 1px solid var(--border); }
-.prod-price { font-family: var(--sans); font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1; }
-.prod-price sup { font-size: .7rem; vertical-align: super; color: var(--faint); }
-.prod-vat   { font-size: .62rem; color: var(--faint); }
-
-.btn-prod { font-family: var(--body); font-size: .75rem; font-weight: 600; padding: .5rem 1.1rem; border-radius: 99px; text-decoration: none; border: 1.5px solid var(--text); color: var(--text); transition: background .2s, color .2s; }
-.btn-prod:hover { background: var(--text); color: var(--bg); }
-
-/* WORKFLOW */
-.flow-list { display: flex; flex-direction: column; gap: .5rem; }
-.flow-row {
-  display: flex; align-items: center; flex-wrap: wrap; gap: .5rem;
-  padding: .85rem 1.2rem;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
+/* RESEARCH */
+.cred-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem; margin-top: 2rem;
 }
-.flow-who { font-size: .7rem; font-weight: 600; color: var(--text); min-width: 5.5rem; flex-shrink: 0; font-family: var(--body); }
-.flow-chip { font-family: var(--mono); font-size: .68rem; padding: .2rem .6rem; border-radius: 4px; white-space: nowrap; border: 1px solid var(--border); background: var(--tertiary); color: var(--muted); }
-.flow-arr  { color: var(--border-hi); font-size: .85rem; }
-.flow-ok   { font-family: var(--mono); font-size: .68rem; padding: .2rem .6rem; border-radius: 4px; background: var(--bg-green); border: 1px solid #bbf7d0; color: var(--c-green); white-space: nowrap; }
+.cred-card {
+  border: 1px solid var(--border); border-radius: .75rem;
+  padding: 1.2rem 1.4rem; background: var(--tertiary);
+  transition: border-color .2s;
+}
+.cred-card:hover { border-color: var(--border-hi); }
+.cred-label {
+  font-family: var(--mono); font-size: .65rem;
+  color: var(--faint); text-transform: uppercase;
+  letter-spacing: .08em; margin-bottom: .4rem;
+}
+.cred-card h3 { font-family: var(--sans); font-size: .88rem; font-weight: 700; }
 
-/* QUOTE */
-.quote-block { text-align: center; max-width: 680px; margin: 0 auto; }
-.quote-block blockquote { font-family: var(--sans); font-size: 1.25rem; line-height: 1.6; font-style: italic; color: var(--text); margin-bottom: 1.5rem; }
-.quote-author { font-weight: 600; font-size: .95rem; }
-.quote-role   { font-size: .82rem; color: var(--muted); margin-top: .2rem; }
+/* WAITLIST */
+.waitlist-inner { max-width: 520px; margin: 0 auto; text-align: center; }
+.waitlist-inner h2 {
+  font-family: var(--sans);
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 700; margin-bottom: .6rem;
+}
+.waitlist-inner p { font-size: .92rem; color: var(--muted); margin-bottom: 1.6rem; line-height: 1.7; }
+.waitlist-form { display: flex; gap: .6rem; flex-wrap: wrap; justify-content: center; }
+.waitlist-input {
+  flex: 1; min-width: 220px;
+  padding: .65rem 1rem;
+  border: 1.5px solid var(--border-hi);
+  border-radius: 99px;
+  font-size: .9rem; font-family: var(--body);
+  background: var(--bg); color: var(--text);
+  outline: none; transition: border-color .2s;
+}
+.waitlist-input:focus { border-color: var(--text); }
+.waitlist-note {
+  font-family: var(--mono); font-size: .68rem;
+  color: var(--faint); margin-top: .8rem; text-align: center;
+}
 
 /* FOOTER */
 footer { border-top: 1px solid var(--border); padding: 2rem 0; background: var(--bg); }
-.footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-.footer-logo { font-family: var(--sans); font-size: .82rem; font-weight: 700; color: var(--text); letter-spacing: .05em; }
-.footer-links { display: flex; gap: 1.5rem; }
-.footer-links a { font-size: .78rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+.footer-inner {
+  display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+}
+.footer-logo { font-family: var(--sans); font-size: .82rem; font-weight: 700; letter-spacing: .05em; }
+.footer-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.footer-links a { font-size: .75rem; color: var(--faint); text-decoration: none; transition: color .2s; }
 .footer-links a:hover { color: var(--text); }
-.footer-vat { font-size: .7rem; color: var(--faint); }
+.footer-note { font-size: .72rem; color: var(--faint); }
+
+@media (max-width: 600px) {
+  .hero { padding: 3.5rem 0 3rem; }
+  .sec-white, .sec-grey { padding: 3.5rem 0; }
+  .outcome-row { flex-direction: column; gap: .5rem; }
+}
 </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5D2WZG9Q"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
-<!-- NAV -->
-<header class="site-nav">
+<nav>
   <div class="wrap">
     <div class="nav-inner">
-      <a class="logo" href="https://doremifo.com">DoReMiFo <span class="sep">/</span> Plugins</a>
-      <nav class="nav-links">
-        <a href="#plugins">Plugins</a>
-        <a href="#pack">Pack</a>
-        <a class="btn-nav" href="#pack">Get the pack</a>
-      </nav>
+      <a class="nav-logo" href="#">DoReMiFo</a>
+      <div class="nav-links">
+        <a href="#problem">Why it matters</a>
+        <a href="#outcomes">What you get</a>
+        <a href="#ecosystem">Products</a>
+        <a href="#research">Research</a>
+        <a href="https://play.doremifo.com">Play</a>
+        <a href="#waitlist" class="nav-cta">Get Early Access</a>
+      </div>
     </div>
   </div>
-</header>
+</nav>
 
 <!-- HERO -->
-<section class="sec-white" style="border-top:none; padding-top: 5rem; padding-bottom: 4rem;">
-  <div class="wrap">
-    <div class="hero-label">MAX 4 Live · Audio QA Utilities</div>
-    <h1 class="hero" style="font-family:var(--sans);font-size:clamp(1.9rem,4.5vw,3.2rem);font-weight:700;line-height:1.15;margin-bottom:1.2rem;">
-      Precision tools for<br>sound quality control<br>in Ableton Live.
-    </h1>
-    <p class="hero-body">
-      Seven professional MAX 4 Live plugins for sound designers, music researchers, and audio engineers. Every parameter calibrated to psychoacoustic research standards — silence onset, peak protection, loudness, duration, spectrum, and WAV export.
-    </p>
-    <div class="hero-tags">
-      <span class="htag">MAX 4 Live</span>
-      <span class="htag">Ableton 11 / 12</span>
-      <span class="htag">44.1 kHz · 24-bit</span>
-      <span class="htag">EU VAT incl.</span>
-      <span class="htag">Creem · Estonia MoR</span>
-      <span class="htag">.maxpat · no dependencies</span>
-    </div>
+<div class="wrap-narrow">
+  <div class="hero">
+    <div class="hero-label">Sound Intelligence Platform</div>
+    <h1>Sound shapes trust.<br><em>Now you can measure it.</em></h1>
+    <p class="hero-sub">DoReMiFo gives sound designers and brand teams a data layer for audio decisions — so the sounds you choose are backed by evidence, not instinct.</p>
     <div class="hero-cta">
-      <a class="btn-primary" href="#pack">Get the pack — €35</a>
-      <a class="btn-outline" href="#plugins">Browse individual plugins</a>
+      <a class="btn-primary" href="https://play.doremifo.com">▶ Discover your hearing profile</a>
+      <a class="btn-outline" href="#waitlist">Get Early Access</a>
     </div>
-    <div class="hero-stats">
-      <div><div class="stat-n">7</div><div class="stat-l">M4L utilities</div></div>
-      <div><div class="stat-n">0 ms</div><div class="stat-l">passthrough latency</div></div>
-      <div><div class="stat-n">44.1k</div><div class="stat-l">24-bit native</div></div>
+    <div class="hero-proof">
+      <div class="proof-item"><strong>Academic origin</strong>HAMU Praha · SGS Grant</div>
+      <div class="proof-item"><strong>Emotional model</strong>Russell Circumplex (1980)</div>
+      <div class="proof-item"><strong>Acoustic framework</strong>Inspired by IRCAM descriptors &amp; Essentia</div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- PACK -->
-<section class="sec-grey" id="pack">
+<!-- 01 PROBLEM -->
+<div class="sec-white" id="problem">
+  <div class="wrap-narrow sec">
+    <div class="sec-label">01 — The problem</div>
+    <h2>Audio branding runs on gut feeling.</h2>
+    <p class="sec-desc">Sound is the most emotionally direct medium a brand has — and the least rigorously managed. That gap is expensive.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="pc-icon">🎯</div>
+        <h3>Briefs that don't land</h3>
+        <p>"Make it feel premium." "More trustworthy." Without a shared reference, every audio brief is a guessing game — and revisions are expensive.</p>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon">📉</div>
+        <h3>Sound that contradicts your brand</h3>
+        <p>A single notification tone can undermine months of visual brand work. Most teams don't find out until users complain — or churn.</p>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon">🔄</div>
+        <h3>No way to validate</h3>
+        <p>You can A/B test a headline. You can user-test a colour. Sound? You ship it and hope. There has been no tool for evidence-based audio decisions — until now.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 OUTCOMES -->
+<div class="sec-grey" id="outcomes">
+  <div class="wrap-narrow sec">
+    <div class="sec-label">02 — What you get</div>
+    <h2>A common language for sound.</h2>
+    <p class="sec-desc">DoReMiFo translates acoustic properties into emotional outcomes — so designers and clients can speak the same language, and decisions have a reference point.</p>
+    <div class="outcome-list">
+      <div class="outcome-row">
+        <div class="outcome-marker">→</div>
+        <div class="outcome-body">
+          <h3>Know what a sound actually communicates</h3>
+          <p>Before you ship. Before the client hears it. DoReMiFo maps acoustic properties to the emotional responses they reliably produce — so you can design with intent, not hope.</p>
+        </div>
+      </div>
+      <div class="outcome-row">
+        <div class="outcome-marker">→</div>
+        <div class="outcome-body">
+          <h3>Brief smarter, revise less</h3>
+          <p>Replace vague adjectives with measurable targets. A brief a sound designer can act on — and a client can approve without endless rounds.</p>
+        </div>
+      </div>
+      <div class="outcome-row">
+        <div class="outcome-marker">→</div>
+        <div class="outcome-body">
+          <h3>Validate before you commit</h3>
+          <p>Compare candidates against a perceptual reference library. Know whether your shortlisted sounds land where you intend — before they go into production or on air.</p>
+        </div>
+      </div>
+      <div class="outcome-row">
+        <div class="outcome-marker">→</div>
+        <div class="outcome-body">
+          <h3>Evidence your clients can present upward</h3>
+          <p>Audio decisions are hard to defend in a boardroom. DoReMiFo gives you data — perceptual scores, emotional positioning, benchmarks — that make the case without requiring the room to trust your ear.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 ECOSYSTEM -->
+<div class="sec-white" id="ecosystem">
+  <div class="wrap sec">
+    <div class="sec-label">03 — Products</div>
+    <h2>Four ways in.</h2>
+    <p class="sec-desc" style="max-width:560px">Whether you're a researcher, a sound designer, or just curious about how you hear — there's a DoReMiFo product for you.</p>
+    <div class="eco-grid">
+      <a class="eco-card" href="https://play.doremifo.com">
+        <span class="badge badge-blue">Free · Live now</span>
+        <h3>Match the Sound</h3>
+        <p>Three sounds. One is different. Find it. Discover your hearing profile in 10 rounds — and see where you sit on the listener spectrum.</p>
+        <div class="eco-link">→ play.doremifo.com</div>
+      </a>
+      <a class="eco-card" href="https://study.doremifo.com">
+        <span class="badge badge-green">Free · Open to all</span>
+        <h3>Perception Study</h3>
+        <p>Contribute to active research on sound and emotion. Rate short sounds and help build the first evidence base for audio branding.</p>
+        <div class="eco-link">→ study.doremifo.com</div>
+      </a>
+      <a class="eco-card" href="https://plugins.doremifo.com">
+        <span class="badge badge-purple">Early Access</span>
+        <h3>Audio Plugins</h3>
+        <p>Professional tools for sound designers. Synthesise, evaluate and position sounds using the DoReMiFo perceptual framework — inside your DAW.</p>
+        <div class="eco-link">→ plugins.doremifo.com</div>
+      </a>
+      <a class="eco-card" href="#waitlist">
+        <span class="badge badge-amber">Coming soon</span>
+        <h3>Sound Intelligence App</h3>
+        <p>Learn synthesis through the lens of emotion. An interactive platform that teaches sound design by mapping what you hear to what listeners feel.</p>
+        <div class="eco-link">→ Join waitlist</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- 04 RESEARCH -->
+<div class="sec-grey" id="research">
+  <div class="wrap-narrow sec">
+    <div class="sec-label">04 — Research</div>
+    <h2>Built on evidence, not opinion.</h2>
+    <p class="sec-desc">DoReMiFo starts as an academic research project — because the tools are only as good as the data behind them. No product ships without peer-reviewable foundation.</p>
+    <div class="cred-grid">
+      <div class="cred-card">
+        <div class="cred-label">Institution</div>
+        <h3>HAMU Praha</h3>
+      </div>
+      <div class="cred-card">
+        <div class="cred-label">Funding</div>
+        <h3>SGS Academic Grant</h3>
+      </div>
+      <div class="cred-card">
+        <div class="cred-label">Emotional model</div>
+        <h3>Russell Circumplex (1980)</h3>
+      </div>
+      <div class="cred-card">
+        <div class="cred-label">Acoustic framework</div>
+        <h3>Inspired by IRCAM &amp; Essentia</h3>
+      </div>
+      <div class="cred-card">
+        <div class="cred-label">Study participants</div>
+        <h3>200+ via Prolific</h3>
+      </div>
+      <div class="cred-card">
+        <div class="cred-label">Stimulus library</div>
+        <h3>100 controlled sounds</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 05 WAITLIST -->
+<div class="sec-white" id="waitlist">
   <div class="wrap">
-    <h2 class="sec-heading">Complete Pack</h2>
-    <div class="pack-card">
-      <img class="pack-hero-img" src="img/hero_pack.png" alt="DoReMiFo QA Pack — all 7 plugins">
-      <div class="pack-body">
-        <div>
-          <div class="pack-label">Best value · all 7 plugins</div>
-          <h2>DoReMiFo QA Pack</h2>
-          <p>Kompletná sada pre profesionálne audio QA v Abletone. Silence detection, clip protection, A/B comparison, duration verification, spectral analysis, LUFS monitoring, a batch export. One install, everything covered.</p>
-          <div class="pack-items">
-            <span class="pack-item">Silence Checker</span>
-            <span class="pack-item">Clip Guard</span>
-            <span class="pack-item">A/B Comparator</span>
-            <span class="pack-item">Duration Checker</span>
-            <span class="pack-item">Spectrogram</span>
-            <span class="pack-item">LUFS Meter</span>
-            <span class="pack-item">Export Utility v2</span>
-          </div>
-        </div>
-        <div class="price-col">
-          <div class="price-old">€56</div>
-          <div class="price-main"><sup>€</sup>35</div>
-          <div class="price-save">save 37%</div>
-          <div class="price-vat">incl. VAT · instant download</div>
-          <a class="btn-primary" style="width:100%;text-align:center;margin-top:.8rem;" href="https://YOUR-CREEM-LINK/pack" target="_blank">Buy the pack</a>
-        </div>
+    <div class="waitlist-inner">
+      <div class="sec-label" style="text-align:center;margin-bottom:.8rem">Early Access</div>
+      <h2>Be first when the tools launch.</h2>
+      <p>The DoReMiFo plugin suite and Sound Intelligence App are in development. Leave your email — we'll reach out when access opens.</p>
+      <div class="waitlist-form">
+        <input class="waitlist-input" type="email" id="wl-email" placeholder="your@email.com">
+        <button class="btn-primary" onclick="submitWaitlist()">Get Early Access →</button>
       </div>
+      <p class="waitlist-note" id="wl-msg">No spam. Used only to notify you about DoReMiFo product launches.</p>
     </div>
   </div>
-</section>
+</div>
 
-<!-- PLUGINS -->
-<section class="sec-white" id="plugins">
-  <div class="wrap">
-    <h2 class="sec-heading">Individual plugins</h2>
-    <div class="prod-grid">
-
-      <div class="prod-card">
-        <img class="prod-img" src="img/01-silence-checker.png" alt="Silence Checker">
-        <div class="prod-content">
-          <div class="prod-tag"><span class="num">01</span><span class="prod-cat cat-green">QA</span><span class="prod-m4l">M4L</span></div>
-          <h3>Silence Checker</h3>
-          <div class="prod-sub">Silence at signal onset · ms precision</div>
-          <p>Meria milisekundy ticha pred prvým non-zero sampom. Target 0–5 ms, auto-freeze pri prvom signale, reset button. Passthrough bez latencie.</p>
-          <ul class="prod-feats">
-            <li>Target: 0 ms · tolerance ≤ 5 ms</li>
-            <li>10 ms poll · auto-stop na prvý signal</li>
-            <li>live.numbox display + reset</li>
-            <li>Stereo passthrough · zero latency</li>
-          </ul>
-          <div class="prod-footer">
-            <div><div class="prod-price"><sup>€</sup>7</div><div class="prod-vat">incl. VAT</div></div>
-            <a class="btn-prod" href="https://YOUR-CREEM-LINK/silence-checker" target="_blank">Buy</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="prod-card">
-        <img class="prod-img" src="img/02-clip-guard.png" alt="Clip Guard">
-        <div class="prod-content">
-          <div class="prod-tag"><span class="num">02</span><span class="prod-cat cat-coral">Protection</span><span class="prod-m4l">M4L</span></div>
-          <h3>Clip Guard</h3>
-          <div class="prod-sub">Real-time peak monitor · −1 dBTP</div>
-          <p>Sleduje stereo výstup na true peak violations. Peak L, Peak R, hold maximum. Okamžité upozornenie pred WAV exportom.</p>
-          <ul class="prod-feats">
-            <li>Limit: −1 dBTP · stereo L + R</li>
-            <li>Peak hold · running max display</li>
-            <li>50 ms poll · instant clip indicator</li>
-            <li>Reset hold · passthrough stereo</li>
-          </ul>
-          <div class="prod-footer">
-            <div><div class="prod-price"><sup>€</sup>7</div><div class="prod-vat">incl. VAT</div></div>
-            <a class="btn-prod" href="https://YOUR-CREEM-LINK/clip-guard" target="_blank">Buy</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="prod-card">
-        <img class="prod-img" src="img/03-ab-omparator.png" alt="A/B Comparator">
-        <div class="prod-content">
-          <div class="prod-tag"><span class="num">03</span><span class="prod-cat cat-blue">Comparison</span><span class="prod-m4l">M4L</span></div>
-          <h3>A/B Comparator</h3>
-          <div class="prod-sub">Two WAV variants · sequential playback</div>
-          <p>CELL/VAR selektory, play A / B / A→B so 100 ms medzerou. Rýchle percepčné porovnanie bez prepínania trackov.</p>
-          <ul class="prod-feats">
-            <li>CELL 01–10 × VAR 01–10 dropdown</li>
-            <li>Play A / B / A→B / Stop</li>
-            <li>2600 ms auto-sequence (2500 + 100 gap)</li>
-            <li>sfplay~ · independent L+R mix</li>
-          </ul>
-          <div class="prod-footer">
-            <div><div class="prod-price"><sup>€</sup>9</div><div class="prod-vat">incl. VAT</div></div>
-            <a class="btn-prod" href="https://YOUR-CREEM-LINK/ab-comparator" target="_blank">Buy</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="prod-card">
-        <img class="prod-img" src="img/04-duration-checker.png" alt="Duration Checker">
-        <div class="prod-content">
-          <div class="prod-tag"><span class="num">04</span><span class="prod-cat cat-orange">QA</span><span class="prod-m4l">M4L</span></div>
-          <h3>Duration Checker</h3>
-          <div class="prod-sub">Stimulus length · 2500 ms ±50 ms</div>
-          <p>Auto-start pri prvom signale, freeze na tichu. Porovná nameranú dĺžku s 2500 ms targetom a zobrazí odchýlku v ms.</p>
-          <ul class="prod-feats">
-            <li>Target: 2500 ms · tolerance ±50 ms</li>
-            <li>1 ms metro counter · auto-start/stop</li>
-            <li>Deviation display (ms od 2500)</li>
-            <li>OK / WARN indikator · reset</li>
-          </ul>
-          <div class="prod-footer">
-            <div><div class="prod-price"><sup>€</sup>7</div><div class="prod-vat">incl. VAT</div></div>
-            <a class="btn-prod" href="https://YOUR-CREEM-LINK/duration-checker" target="_blank">Buy</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="prod-card">
-        <img class="prod-img" src="img/05-spectogram.png" alt="Spectrogram">
-        <div class="prod-content">
-          <div class="prod-tag"><span class="num">05</span><span class="prod-cat cat-teal">Analysis</span><span class="prod-m4l">M4L</span></div>
-          <h3>Spectrogram</h3>
-          <div class="prod-sub">Real-time FFT · 20 Hz – 20 kHz</div>
-          <p>Natívny spectroscope~ s ref markermi na 220 / 800 / 2500 Hz pre DoReMiFo stimulus alignment. Freeze frame, FFT size on-the-fly.</p>
-          <ul class="prod-feats">
-            <li>FFT 512 / 1024 / 2048 / 4096 / 8192</li>
-            <li>Ref markery: 220 / 800 / 2500 Hz</li>
-            <li>Freeze toggle · mono sum L+R</li>
-            <li>AUX return track · passthrough</li>
-          </ul>
-          <div class="prod-footer">
-            <div><div class="prod-price"><sup>€</sup>9</div><div class="prod-vat">incl. VAT</div></div>
-            <a class="btn-prod" href="https://YOUR-CREEM-LINK/spectrogram" target="_blank">Buy</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="prod-card">
-        <img class="prod-img" src="img/06-lufs-meter.png" alt="LUFS Meter">
-        <div class="prod-content">
-          <div class="prod-tag"><span class="num">06</span><span class="prod-cat cat-amber">Loudness</span><span class="prod-m4l">M4L</span></div>
-          <h3>LUFS Meter</h3>
-          <div class="prod-sub">Momentary + integrated · −18 LUFS</div>
-          <p>ITU-R BS.1770 aproximácia, 400 ms momentary okno, resetovateľný integrated. L/R live.meter~ bar. Signál mimo −18 ±1 LUFS je okamžite flagovaný.</p>
-          <ul class="prod-feats">
-            <li>Target: −18 LUFS · tolerance ±1 LU</li>
-            <li>Momentary 400 ms · integrated od reset</li>
-            <li>L/R live.meter~ bar display</li>
-            <li>100 ms refresh · passthrough stereo</li>
-          </ul>
-          <div class="prod-footer">
-            <div><div class="prod-price"><sup>€</sup>9</div><div class="prod-vat">incl. VAT</div></div>
-            <a class="btn-prod" href="https://YOUR-CREEM-LINK/lufs-meter" target="_blank">Buy</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="prod-card" style="grid-column: 1 / -1; max-width: 480px;">
-        <img class="prod-img" src="img/07-export-utility.png" alt="Export Utility v2" style="aspect-ratio: 16/10;">
-        <div class="prod-content">
-          <div class="prod-tag"><span class="num">07</span><span class="prod-cat cat-purple">Export</span><span class="prod-m4l">M4L</span></div>
-          <h3>Export Utility v2</h3>
-          <div class="prod-sub">One-click WAV · 44.1 kHz / 24-bit / 2500 ms</div>
-          <p>Vyber CELL + VAR, zahraj synth, stlač REC. sfrecord~ zachytí presne 2500 ms, pomenuje súbor CELL##_VAR##.wav a uloží automaticky. Žiadne manuálne kroky.</p>
-          <ul class="prod-feats">
-            <li>CELL 01–10 × VAR 01–10 dropdown</li>
-            <li>Auto-record 2500 ms → auto-stop</li>
-            <li>Output: 44100 Hz · 24-bit · stereo</li>
-            <li>Naming: CELL##_VAR##.wav · zero clicks</li>
-          </ul>
-          <div class="prod-footer">
-            <div><div class="prod-price"><sup>€</sup>9</div><div class="prod-vat">incl. VAT</div></div>
-            <a class="btn-prod" href="https://YOUR-CREEM-LINK/export-utility" target="_blank">Buy</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- WORKFLOW -->
-<section class="sec-grey">
-  <div class="wrap">
-    <h2 class="sec-heading">Typical workflow</h2>
-    <div class="flow-list">
-      <div class="flow-row">
-        <div class="flow-who">1 · Compose</div>
-        <span class="flow-chip">Ableton synth track</span>
-        <span class="flow-arr">→</span>
-        <span class="flow-chip">Clip Guard + LUFS Meter + Silence Checker</span>
-        <span class="flow-arr">→</span>
-        <span class="flow-ok">Monitor real-time ✓</span>
-      </div>
-      <div class="flow-row">
-        <div class="flow-who">2 · Compare</div>
-        <span class="flow-chip">A/B Comparator</span>
-        <span class="flow-arr">→</span>
-        <span class="flow-chip">Vyber CELL + VAR A &amp; B</span>
-        <span class="flow-arr">→</span>
-        <span class="flow-ok">Play A → B ✓</span>
-      </div>
-      <div class="flow-row">
-        <div class="flow-who">3 · Export</div>
-        <span class="flow-chip">Export Utility v2</span>
-        <span class="flow-arr">→</span>
-        <span class="flow-chip">CELL##_VAR## → REC</span>
-        <span class="flow-arr">→</span>
-        <span class="flow-ok">CELL01_VAR03.wav ✓</span>
-      </div>
-      <div class="flow-row">
-        <div class="flow-who">4 · Verify</div>
-        <span class="flow-chip">Spectrogram + Duration Checker</span>
-        <span class="flow-arr">→</span>
-        <span class="flow-chip">Skontroluj spektrum + 2500 ms</span>
-        <span class="flow-arr">→</span>
-        <span class="flow-ok">All checks pass ✓</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- QUOTE -->
-<section class="sec-grey">
-  <div class="wrap">
-    <div class="quote-block">
-      <blockquote>"Every sound we deliver comes with a data passport: an acoustic fingerprint linked to a perceptual prediction."</blockquote>
-      <div class="quote-author">Bohdan Fedor</div>
-      <div class="quote-role">Founder &amp; CEO — <a href="mailto:bohdan@doremifo.com">bohdan@doremifo.com</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="footer-inner">
       <div class="footer-logo">DoReMiFo</div>
       <div class="footer-links">
-        <a href="https://doremifo.com">doremifo.com</a>
-        <a href="https://study.doremifo.com">study</a>
-        <a href="https://play.doremifo.com">play</a>
-        <a href="https://app.doremifo.com">app</a>
+        <a href="https://play.doremifo.com">Play</a>
+        <a href="https://study.doremifo.com">Study</a>
+        <a href="https://plugins.doremifo.com">Plugins</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="mailto:info@doremifo.com">Contact</a>
       </div>
-      <div class="footer-vat">Korunní 2569/108, Prague · CZ · VAT incl. · EU OSS via Creem</div>
+      <div class="footer-note">© 2025 DoReMiFo · Prague · CZ</div>
     </div>
   </div>
 </footer>
 
+<script>
+async function submitWaitlist() {
+  const email = document.getElementById('wl-email').value.trim();
+  const msg   = document.getElementById('wl-msg');
+  const btn   = document.querySelector('.waitlist-form .btn-primary');
+
+  if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) {
+    msg.style.color = '#9a3412';
+    msg.textContent = 'Please enter a valid email address.';
+    return;
+  }
+
+  btn.textContent = 'Sending…';
+  btn.style.opacity = '.6';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('https://formspree.io/f/xwvwoqnz', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    if (res.ok) {
+      document.getElementById('wl-email').value = '';
+      msg.style.color = '#166534';
+      msg.textContent = '✓ You\'re on the list. We\'ll be in touch.';
+    } else {
+      throw new Error();
+    }
+  } catch {
+    msg.style.color = '#9a3412';
+    msg.textContent = 'Something went wrong. Please try again.';
+  } finally {
+    btn.textContent = 'Get Early Access →';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+  }
+}
+</script>
 </body>
 </html>

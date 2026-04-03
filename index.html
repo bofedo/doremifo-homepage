@@ -1,4 +1,4 @@
-<meta name="description" content="DoReMiFo maps acoustic properties to emotional<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -39,7 +39,6 @@ body { font-family: var(--body); background: var(--bg); color: var(--text); font
 .wrap        { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
 .wrap-narrow { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
 
-/* NAV */
 nav {
   border-bottom: 1px solid var(--border);
   position: sticky; top: 0;
@@ -70,7 +69,6 @@ nav {
 }
 .nav-cta:hover { opacity: .8; }
 
-/* SECTIONS */
 .sec-white { background: var(--bg); border-top: 1px solid var(--border); padding: 5rem 0; }
 .sec-grey  { background: var(--tertiary); border-top: 1px solid var(--border); padding: 5rem 0; }
 
@@ -94,7 +92,6 @@ nav {
   padding-left: 1rem;
 }
 
-/* HERO */
 .hero { padding: 5.5rem 0 4.5rem; border-bottom: 1px solid var(--border); }
 .hero-label {
   font-family: var(--mono);
@@ -140,7 +137,6 @@ nav {
 .proof-item { font-size: .78rem; color: var(--faint); }
 .proof-item strong { color: var(--muted); font-weight: 500; display: block; margin-bottom: .1rem; }
 
-/* PROBLEM */
 .problem-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -156,7 +152,6 @@ nav {
 .problem-card h3 { font-family: var(--sans); font-size: 1rem; font-weight: 700; margin-bottom: .4rem; }
 .problem-card p  { font-size: .85rem; color: var(--muted); line-height: 1.65; }
 
-/* OUTCOMES */
 .outcome-list { display: flex; flex-direction: column; margin-top: 2rem; }
 .outcome-row {
   display: flex; gap: 2rem; align-items: flex-start;
@@ -174,7 +169,6 @@ nav {
 }
 .outcome-body p { font-size: .88rem; color: var(--muted); line-height: 1.7; }
 
-/* ECOSYSTEM */
 .eco-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -195,7 +189,6 @@ nav {
 .eco-card p  { font-size: .82rem; color: var(--muted); line-height: 1.6; flex: 1; }
 .eco-link    { font-size: .72rem; color: var(--faint); font-family: var(--mono); margin-top: .4rem; }
 
-/* BADGES */
 .badge {
   display: inline-block; font-size: .65rem; font-weight: 600;
   padding: .18rem .55rem; border-radius: 4px;
@@ -207,7 +200,6 @@ nav {
 .badge-purple { background:#faf5ff; color:#4c1d95; border:1px solid #e9d5ff; }
 .badge-gray   { background:var(--tertiary); color:var(--muted); border:1px solid var(--border); }
 
-/* RESEARCH */
 .cred-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -226,7 +218,6 @@ nav {
 }
 .cred-card h3 { font-family: var(--sans); font-size: .88rem; font-weight: 700; }
 
-/* WAITLIST */
 .waitlist-inner { max-width: 520px; margin: 0 auto; text-align: center; }
 .waitlist-inner h2 {
   font-family: var(--sans);
@@ -250,7 +241,6 @@ nav {
   color: var(--faint); margin-top: .8rem; text-align: center;
 }
 
-/* FOOTER */
 footer { border-top: 1px solid var(--border); padding: 2rem 0; background: var(--bg); }
 .footer-inner {
   display: flex; align-items: center;
@@ -267,16 +257,8 @@ footer { border-top: 1px solid var(--border); padding: 2rem 0; background: var(-
   .sec-white, .sec-grey { padding: 3.5rem 0; }
   .outcome-row { flex-direction: column; gap: .5rem; }
 }
-</style>
-</head>
-<body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5D2WZG9Q"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
-<!-- ── CONSENT BANNER ── -->
-<style>
+/* CONSENT BANNER */
 #dmf-consent {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
   background: #ffffff; border-top: 1px solid #e2e2e2;
@@ -308,6 +290,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 #dmf-decline:hover { border-color: #1a1a1a; }
 </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5D2WZG9Q"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- CONSENT BANNER -->
 <div id="dmf-consent" style="display:none">
   <p>We use analytics cookies to understand how visitors use this site. No advertising or tracking. <a href="https://doremifo.com/privacy" target="_blank">Privacy Policy</a></p>
   <div id="dmf-consent-btns">
@@ -317,40 +307,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 <script>
 (function() {
-  const KEY = 'dmf_consent';
-  const stored = localStorage.getItem(KEY);
+  var KEY = 'dmf_consent';
+  var stored = localStorage.getItem(KEY);
+
+  window.dataLayer = window.dataLayer || [];
+
   function applyConsent(granted) {
-    const val = granted ? 'granted' : 'denied';
-    if (typeof gtag === 'function') {
-      gtag('consent', 'update', {
-        analytics_storage: val,
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-      });
-    }
+    window.dataLayer.push({
+      'event': 'consent_update',
+      'analytics_storage': granted ? 'granted' : 'denied',
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied'
+    });
   }
+
   window.dmfConsent = function(granted) {
     localStorage.setItem(KEY, granted ? '1' : '0');
     applyConsent(granted);
     document.getElementById('dmf-consent').style.display = 'none';
   };
+
   if (stored === null) {
-    if (typeof gtag === 'function') {
-      gtag('consent', 'default', {
-        analytics_storage: 'denied',
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-      });
-    }
     document.getElementById('dmf-consent').style.display = 'flex';
   } else {
     applyConsent(stored === '1');
   }
 })();
 </script>
-<!-- ── END CONSENT BANNER ── -->
 
 <nav>
   <div class="wrap">
@@ -368,7 +352,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="wrap-narrow">
   <div class="hero">
     <div class="hero-label">Sound Intelligence Platform</div>
@@ -386,7 +369,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 
-<!-- 01 PROBLEM -->
 <div class="sec-white" id="problem">
   <div class="wrap-narrow sec">
     <div class="sec-label">01 — The problem</div>
@@ -412,7 +394,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 
-<!-- 02 OUTCOMES -->
 <div class="sec-grey" id="outcomes">
   <div class="wrap-narrow sec">
     <div class="sec-label">02 — What you get</div>
@@ -451,7 +432,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 
-<!-- 03 ECOSYSTEM -->
 <div class="sec-white" id="ecosystem">
   <div class="wrap sec">
     <div class="sec-label">03 — Products</div>
@@ -486,7 +466,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 
-<!-- 04 RESEARCH -->
 <div class="sec-grey" id="research">
   <div class="wrap-narrow sec">
     <div class="sec-label">04 — Research</div>
@@ -521,7 +500,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 
-<!-- 05 WAITLIST -->
 <div class="sec-white" id="waitlist">
   <div class="wrap">
     <div class="waitlist-inner">

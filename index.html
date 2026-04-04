@@ -2,13 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YNYJ0RC2SJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-YNYJ0RC2SJ');
-</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="DoReMiFo maps acoustic properties to emotional response — giving sound designers and brand teams a data layer for audio decisions.">
 <title>DoReMiFo — Sound Intelligence Platform</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -256,80 +250,9 @@ footer { border-top: 1px solid var(--border); padding: 2rem 0; background: var(-
   .sec-white, .sec-grey { padding: 3.5rem 0; }
   .outcome-row { flex-direction: column; gap: .5rem; }
 }
-
-/* CONSENT BANNER */
-#dmf-consent {
-  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
-  background: #ffffff; border-top: 1px solid #e2e2e2;
-  padding: 1rem 1.5rem;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 1rem; flex-wrap: wrap;
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: .82rem; color: #666666;
-  box-shadow: 0 -2px 12px rgba(0,0,0,.06);
-}
-#dmf-consent p { flex: 1; min-width: 200px; line-height: 1.55; margin: 0; }
-#dmf-consent a { color: #0d9488; text-decoration: none; }
-#dmf-consent a:hover { text-decoration: underline; }
-#dmf-consent-btns { display: flex; gap: .5rem; flex-shrink: 0; }
-#dmf-accept {
-  padding: .45rem 1.1rem; border-radius: 99px;
-  background: #1a1a1a; color: #fff;
-  border: none; cursor: pointer;
-  font-size: .82rem; font-weight: 600;
-  font-family: inherit; transition: opacity .2s;
-}
-#dmf-accept:hover { opacity: .8; }
-#dmf-decline {
-  padding: .45rem 1.1rem; border-radius: 99px;
-  background: transparent; color: #1a1a1a;
-  border: 1.5px solid #c8c8c8; cursor: pointer;
-  font-size: .82rem; font-weight: 500;
-  font-family: inherit; transition: border-color .2s;
-}
-#dmf-decline:hover { border-color: #1a1a1a; }
 </style>
 </head>
 <body>
-
-<!-- CONSENT BANNER -->
-<div id="dmf-consent" style="display:none">
-  <p>We use analytics cookies to understand how visitors use this site. No advertising or tracking. <a href="https://doremifo.com/privacy" target="_blank">Privacy Policy</a></p>
-  <div id="dmf-consent-btns">
-    <button id="dmf-decline" onclick="dmfConsent(false)">Decline</button>
-    <button id="dmf-accept"  onclick="dmfConsent(true)">Accept</button>
-  </div>
-</div>
-<script>
-(function() {
-  var KEY = 'dmf_consent';
-  var stored = localStorage.getItem(KEY);
-
-  window.dataLayer = window.dataLayer || [];
-
-  function applyConsent(granted) {
-    window.dataLayer.push({
-      'event': 'consent_update',
-      'analytics_storage': granted ? 'granted' : 'denied',
-      'ad_storage': 'denied',
-      'ad_user_data': 'denied',
-      'ad_personalization': 'denied'
-    });
-  }
-
-  window.dmfConsent = function(granted) {
-    localStorage.setItem(KEY, granted ? '1' : '0');
-    applyConsent(granted);
-    document.getElementById('dmf-consent').style.display = 'none';
-  };
-
-  if (stored === null) {
-    document.getElementById('dmf-consent').style.display = 'flex';
-  } else {
-    applyConsent(stored === '1');
-  }
-})();
-</script>
 
 <nav>
   <div class="wrap">
@@ -565,5 +488,10 @@ async function submitWaitlist() {
   }
 }
 </script>
+
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8eac798bb7bb46c5a9b386fea9d56e27"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
 </body>
 </html>
